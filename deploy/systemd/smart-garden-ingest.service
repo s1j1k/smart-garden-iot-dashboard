@@ -1,0 +1,18 @@
+# Always-on MQTT -> SQLite/CSV ingest: the only writer of data/sensor_readings.sqlite.
+# Installed by scripts/deploy-pi.sh, which fills in @USER@ and @REPO@.
+[Unit]
+Description=Smart Garden MQTT ingest (SQLite)
+After=network-online.target mosquitto.service
+Wants=network-online.target
+
+[Service]
+User=@USER@
+WorkingDirectory=@REPO@
+Environment=MQTT_HOST=localhost
+Environment=PYTHONUNBUFFERED=1
+ExecStart=@REPO@/.venv/bin/python scripts/mqtt_to_sqlite.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

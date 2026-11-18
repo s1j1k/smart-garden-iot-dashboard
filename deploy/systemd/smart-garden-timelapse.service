@@ -1,0 +1,20 @@
+# Keeps data/camera/timelapse.mp4 up to the latest photo, hourly (only today's part is re-encoded).
+# Low priority and one core, so the dashboards stay responsive while ffmpeg runs.
+# Installed by scripts/deploy-pi.sh, which fills in @USER@ and @REPO@.
+[Unit]
+Description=Smart Garden timelapse video
+After=multi-user.target
+
+[Service]
+User=@USER@
+WorkingDirectory=@REPO@
+ExecStart=@REPO@/.venv/bin/python scripts/build_timelapse.py
+Nice=15
+CPUQuota=100%
+CPUWeight=20
+OOMScoreAdjust=800
+Restart=on-failure
+RestartSec=300
+
+[Install]
+WantedBy=multi-user.target

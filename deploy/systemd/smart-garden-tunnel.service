@@ -1,0 +1,21 @@
+# Cloudflare named tunnel "smart-garden": https://smartgarden.tech -> :8501 (public)
+# and https://admin.smartgarden.tech -> :8502 (admin). The hostnames are set in
+# the Cloudflare dashboard (Zero Trust -> Networks -> Tunnels -> smart-garden ->
+# Public hostnames); this unit only connects the Pi, with the tunnel token from
+# @TUNNEL_TOKEN_FILE@ (mode 600, saved by deploy-pi.sh --tunnel-token-stdin).
+# Installed by scripts/deploy-pi.sh, which fills in @USER@, @REPO@, @CLOUDFLARED@
+# and @TUNNEL_TOKEN_FILE@.
+[Unit]
+Description=Smart Garden Cloudflare tunnel (smart-garden)
+After=network-online.target smart-garden-dashboard.service smart-garden-admin.service
+Wants=network-online.target
+
+[Service]
+User=@USER@
+WorkingDirectory=@REPO@
+ExecStart=@CLOUDFLARED@ tunnel --no-autoupdate run --token-file @TUNNEL_TOKEN_FILE@
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

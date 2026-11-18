@@ -1,0 +1,19 @@
+# Pi Camera Module 3 capture loop. The dashboard Camera page drives it through
+# data/camera/command.json; this is the only process that opens the camera.
+# Uses the system Python because picamera2 / OpenCV come from apt
+# (sudo apt install -y python3-picamera2 python3-opencv).
+# Installed by scripts/deploy-pi.sh, which fills in @USER@ and @REPO@.
+[Unit]
+Description=Smart Garden camera capture
+After=multi-user.target
+
+[Service]
+User=@USER@
+SupplementaryGroups=video
+WorkingDirectory=@REPO@
+ExecStart=/usr/bin/python3 src/camera_capture.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

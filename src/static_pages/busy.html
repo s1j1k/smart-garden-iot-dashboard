@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart Garden · back in a moment</title>
+<style>
+  :root { --bg: #e8f5e9; --leaf: #2e7d32; --leaf-light: #81c784; --text: #1b3a1d; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: radial-gradient(circle at 50% 35%, #f1faf1 0%, var(--bg) 60%, #c8e6c9 100%);
+    color: var(--text); font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+  }
+  main { max-width: 28rem; padding: 2rem 1.25rem; }
+  .sprout { width: 96px; height: 96px; margin: 0 auto 1.5rem; position: relative; }
+  .ring {
+    position: absolute; inset: 0; border-radius: 50%;
+    border: 6px solid var(--leaf-light); border-top-color: var(--leaf);
+    animation: spin 1.1s linear infinite;
+  }
+  .plant { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+           font-size: 40px; animation: sway 2.4s ease-in-out infinite; }
+  h1 { font-size: 1.5rem; margin: 0 0 .5rem; }
+  p { margin: .4rem 0; line-height: 1.5; }
+  .small { font-size: .9rem; opacity: .75; margin-top: 1.25rem; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes sway { 0%, 100% { transform: rotate(-6deg); } 50% { transform: rotate(6deg); } }
+  @media (prefers-reduced-motion: reduce) { .ring, .plant { animation: none; } }
+</style>
+</head>
+<body>
+<main>
+  <div class="sprout" aria-hidden="true"><div class="ring"></div><div class="plant">🌱</div></div>
+  <h1>Sorry, we're experiencing a high load</h1>
+  <p>Lots of people are visiting the Smart Garden right now.</p>
+  <p>Please wait a moment: the demo will load by itself as soon as there is room.</p>
+  <p class="small" id="retry">Trying again in <span id="count">20</span> s…</p>
+</main>
+<script>
+  // Try the live page again every 20 s (the server sends this page while it is busy).
+  var left = 20, count = document.getElementById("count");
+  setInterval(function () {
+    left -= 1;
+    if (left <= 0) { location.reload(); return; }
+    count.textContent = left;
+  }, 1000);
+</script>
+</body>
+</html>

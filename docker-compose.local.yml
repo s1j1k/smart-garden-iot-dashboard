@@ -1,0 +1,20 @@
+# Local PC development (x86_64 / ChromeOS Linux / laptop)
+# Starts Mosquitto for the ESP32 + optional Streamlit note.
+#
+# Usage (from dashboard repo root):
+#   docker compose -f docker-compose.local.yml up -d mosquitto
+#   ./scripts/run-local-dashboard.sh
+#
+# ESP32 secrets.h MQTT_BROKER_HOST must be this machine's WiFi LAN IP on
+# HOME_WIFI (NOT the Linux container IP 100.115.x.x). On ChromeOS:
+#   Settings → Network → HOME_WIFI → IP address
+#   Settings → Developers → Linux → Port forwarding → add 1883 TCP
+
+services:
+  mosquitto:
+    image: eclipse-mosquitto:2
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./docker/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+    restart: unless-stopped

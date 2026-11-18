@@ -1,0 +1,26 @@
+# Smart Garden admin dashboard on port 8502 (admin.smartgarden.tech): every page and
+# control, behind the password set with scripts/set_admin_password.py.
+# Installed by scripts/deploy-pi.sh, which fills in @USER@ and @REPO@.
+[Unit]
+Description=Smart Garden admin dashboard
+After=network-online.target mosquitto.service
+Wants=network-online.target
+
+[Service]
+User=@USER@
+WorkingDirectory=@REPO@
+Environment=MQTT_HOST=localhost
+# smart-garden-ingest stores every message; the dashboard only reads.
+Environment=SMART_GARDEN_DASHBOARD_PERSIST=0
+Environment=SMART_GARDEN_SITE=admin
+ExecStart=@REPO@/.venv/bin/streamlit run src/server.py --server.address 0.0.0.0 --server.port 8502 --server.headless true
+Restart=always
+RestartSec=5
+# The demo site comes first: most CPU when the Pi is busy, and the last thing the
+# kernel would stop if memory ran out.
+Nice=-5
+CPUWeight=1000
+OOMScoreAdjust=-800
+
+[Install]
+WantedBy=multi-user.target

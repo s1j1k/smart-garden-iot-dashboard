@@ -1,0 +1,22 @@
+# Pre-trained net-pot / plant detector (Grounding DINO) on the latest camera frame.
+# Low priority and capped at two cores so the dashboards stay responsive while it runs.
+# Installed by scripts/deploy-pi.sh (when the Pi has the RAM for it), which fills in @USER@ and @REPO@.
+[Unit]
+Description=Smart Garden plant locator (pre-trained detector)
+After=multi-user.target
+
+[Service]
+User=@USER@
+WorkingDirectory=@REPO@
+ExecStart=@REPO@/.venv/bin/python scripts/locate_plants.py
+Nice=15
+CPUQuota=200%
+MemoryMax=2500M
+CPUWeight=20
+# First to go if memory runs out: it only refreshes the pot positions.
+OOMScoreAdjust=900
+Restart=on-failure
+RestartSec=300
+
+[Install]
+WantedBy=multi-user.target

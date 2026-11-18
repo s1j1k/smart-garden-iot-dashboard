@@ -1,0 +1,28 @@
+# Smart Garden public dashboard on port 8501 (smartgarden.tech): readings only, no controls.
+# Installed by scripts/deploy-pi.sh, which fills in @USER@ and @REPO@.
+[Unit]
+Description=Smart Garden dashboard
+After=network-online.target mosquitto.service
+Wants=network-online.target
+
+[Service]
+User=@USER@
+WorkingDirectory=@REPO@
+Environment=MQTT_HOST=localhost
+# smart-garden-ingest stores every message; the dashboard only reads.
+Environment=SMART_GARDEN_DASHBOARD_PERSIST=0
+Environment=SMART_GARDEN_SITE=public
+ExecStart=@REPO@/.venv/bin/streamlit run src/server.py --server.address 0.0.0.0 --server.port 8501 --server.headless true
+Restart=always
+RestartSec=5
+# Public site: below the admin site. Under a crowd it is slowed (MemoryHigh) and
+# if it still grows it is restarted (MemoryMax, then Restart=always) rather
+# than taking the Pi's memory from the admin site. New visitors get the busy
+# page before that (src/load_guard.py).
+CPUWeight=100
+MemoryHigh=1200M
+MemoryMax=1600M
+OOMScoreAdjust=300
+
+[Install]
+WantedBy=multi-user.target

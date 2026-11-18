@@ -1,0 +1,9 @@
+# Pre-trained plant / net-pot detector (src/plant_locator.py, scripts/locate_plants.py).
+# Installed on the Pi by scripts/deploy-pi.sh when it has 3.5 GB+ RAM. Large (~1 GB with
+# the model), so kept out of requirements.txt and the Docker image.
+# Grounding DINO weights (IDEA-Research/grounding-dino-tiny) are Apache-2.0.
+# On the Pi, deploy-pi.sh first installs CPU-only torch from download.pytorch.org/whl/cpu:
+# PyPI's ARM torch also pulls ~1.6 GB of NVIDIA CUDA wheels a Pi cannot use.
+torch>=2.2
+transformers>=4.51
+pillow>=10.0

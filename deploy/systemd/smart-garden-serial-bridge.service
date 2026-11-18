@@ -1,0 +1,19 @@
+# ESP32 serial link over the USB cable: carries its MQTT messages when its WiFi
+# cannot reach the Pi (scripts/serial_mqtt_bridge.py).
+# Installed by scripts/deploy-pi.sh, which fills in @USER@ and @REPO@.
+[Unit]
+Description=Smart Garden ESP32 serial-MQTT bridge
+After=mosquitto.service
+Wants=mosquitto.service
+
+[Service]
+User=@USER@
+WorkingDirectory=@REPO@
+Environment=MQTT_HOST=localhost
+Environment=PYTHONUNBUFFERED=1
+ExecStart=@REPO@/.venv/bin/python scripts/serial_mqtt_bridge.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

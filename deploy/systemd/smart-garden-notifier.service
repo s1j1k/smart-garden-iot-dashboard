@@ -1,0 +1,17 @@
+# Always-on alert notifier: MQTT telemetry -> alerts -> ntfy push (phone / computer).
+# Installed by scripts/deploy-pi.sh, which fills in @USER@ and @REPO@.
+[Unit]
+Description=Smart Garden alert notifier
+After=network-online.target mosquitto.service
+Wants=network-online.target
+
+[Service]
+User=@USER@
+WorkingDirectory=@REPO@
+Environment=MQTT_HOST=localhost
+ExecStart=@REPO@/.venv/bin/python scripts/alert_notifier.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

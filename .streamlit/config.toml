@@ -1,0 +1,13 @@
+# Shared theme for the dashboard (secrets / credentials stay git-ignored).
+# Accent per mode, so the app still follows the device's light / dark setting.
+[theme.light]
+primaryColor = "#7c5cff"
+
+[theme.dark]
+primaryColor = "#9b84ff"
+
+[browser]
+gatherUsageStats = false
+
+[client]
+toolbarMode = "minimal"

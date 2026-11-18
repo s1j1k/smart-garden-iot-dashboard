@@ -1,0 +1,115 @@
+{
+  "_source": {
+    "citation": "Singh, H. & Dunn, B. (2017). Electrical Conductivity and pH Guide for Hydroponics. Oklahoma State University Extension, HLA-6722.",
+    "url": "https://extension.okstate.edu/fact-sheets/electrical-conductivity-and-ph-guide-for-hydroponics",
+    "note": "EC given in mS/cm as published; ppm500 = EC_mS_per_cm * 500, computed here for direct comparison against the Grove TDS sensor's native 500-scale output.",
+    "ph_tolerance_note": "ph_min/ph_max are the published optimum ranges (setpoint is taken from their overlap). ph_tolerance_min/ph_tolerance_max are the wider range the plant grows normally in, used as the controller dead limits: the optimum +/- 0.5 pH, clipped to 5.0-7.5. Plants shift pH themselves as they take up ions, so pH is only corrected when it leaves this range. Most hydroponic crops are grown at pH 5.5-6.5; above about 6.5 iron, manganese and phosphorus availability falls, and below about 5.5 calcium and magnesium uptake falls."
+  },
+  "plants": [
+    {
+      "id": "basil",
+      "common_name": "Basil",
+      "scientific_name": "Ocimum basilicum",
+      "ec_min_mscm": 1.0,
+      "ec_max_mscm": 1.6,
+      "ppm500_min": 500,
+      "ppm500_max": 800,
+      "ph_min": 5.5,
+      "ph_max": 6.0,
+      "ph_tolerance_min": 5.0,
+      "ph_tolerance_max": 6.5
+    },
+    {
+      "id": "lettuce",
+      "common_name": "Lettuce",
+      "scientific_name": "Lactuca sativa",
+      "ec_min_mscm": 1.2,
+      "ec_max_mscm": 1.8,
+      "ppm500_min": 600,
+      "ppm500_max": 900,
+      "ph_min": 6.0,
+      "ph_max": 7.0,
+      "ph_tolerance_min": 5.5,
+      "ph_tolerance_max": 7.5
+    },
+    {
+      "id": "spinach",
+      "common_name": "Spinach",
+      "scientific_name": "Spinacia oleracea",
+      "ec_min_mscm": 1.8,
+      "ec_max_mscm": 2.3,
+      "ppm500_min": 900,
+      "ppm500_max": 1150,
+      "ph_min": 6.0,
+      "ph_max": 7.0,
+      "ph_tolerance_min": 5.5,
+      "ph_tolerance_max": 7.5
+    },
+    {
+      "id": "pak_choi",
+      "common_name": "Pak Choi",
+      "scientific_name": "Brassica rapa subsp. chinensis",
+      "ec_min_mscm": 1.5,
+      "ec_max_mscm": 2.0,
+      "ppm500_min": 750,
+      "ppm500_max": 1000,
+      "ph_min": 6.8,
+      "ph_max": 7.2,
+      "note": "Source gives a single pH point value (7); a small +/-0.2 band is used here for range-based compatibility scoring.",
+      "ph_tolerance_min": 6.3,
+      "ph_tolerance_max": 7.5
+    },
+    {
+      "id": "parsley",
+      "common_name": "Parsley",
+      "scientific_name": "Petroselinum crispum",
+      "ec_min_mscm": 1.8,
+      "ec_max_mscm": 2.2,
+      "ppm500_min": 900,
+      "ppm500_max": 1100,
+      "ph_min": 6.0,
+      "ph_max": 6.5,
+      "ph_tolerance_min": 5.5,
+      "ph_tolerance_max": 7.0
+    },
+    {
+      "id": "sage",
+      "common_name": "Sage",
+      "scientific_name": "Salvia officinalis",
+      "ec_min_mscm": 1.0,
+      "ec_max_mscm": 1.6,
+      "ppm500_min": 500,
+      "ppm500_max": 800,
+      "ph_min": 5.5,
+      "ph_max": 6.5,
+      "ph_tolerance_min": 5.0,
+      "ph_tolerance_max": 7.0
+    },
+    {
+      "id": "cucumber",
+      "common_name": "Cucumber",
+      "scientific_name": "Cucumis sativus",
+      "ec_min_mscm": 1.7,
+      "ec_max_mscm": 2.0,
+      "ppm500_min": 850,
+      "ppm500_max": 1000,
+      "ph_min": 5.0,
+      "ph_max": 5.5,
+      "ph_tolerance_min": 5.0,
+      "ph_tolerance_max": 6.0
+    },
+    {
+      "id": "tomato",
+      "common_name": "Tomato",
+      "scientific_name": "Solanum lycopersicum",
+      "ec_min_mscm": 2.0,
+      "ec_max_mscm": 4.0,
+      "ppm500_min": 1000,
+      "ppm500_max": 2000,
+      "ph_min": 6.0,
+      "ph_max": 6.5,
+      "ph_tolerance_min": 5.5,
+      "ph_tolerance_max": 7.0
+    }
+  ]
+}

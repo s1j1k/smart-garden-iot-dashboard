@@ -1,0 +1,15 @@
+services:
+  smart-garden-pi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      platforms:
+        - linux/arm64
+    platform: linux/arm64
+    image: smart-garden-iot-dashboard:pi4-arm64
+    ports:
+      - "8501:8501"
+      - "1883:1883"
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
